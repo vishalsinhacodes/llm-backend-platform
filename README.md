@@ -120,6 +120,20 @@ python chatbot_streaming/chatbot_streaming.py
 
 ---
 
+### Streaming Chat API
+
+POST /chat/stream
+
+This endpoint streams LLM responses token-by-token similar to ChatGPT.
+
+```bash
+curl -X POST http://127.0.0.1:8000/chat/stream \
+     -H "Content-Type: application/json" \
+     -d '{"message": "Explain GenAI"}'
+```
+
+---
+
 ### Running the FastAPI Backend
 
 ```bash

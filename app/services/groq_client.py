@@ -8,6 +8,18 @@ def chat_completion(prompt: str):
     logger.info(f"LLM request: {prompt}")
     response = client.chat.completions.create(
         model="llama-3.1-8b-instant",
-        messages=[{"role": "user", "content": prompt}]
+        messages=[{"role": "user", "content": prompt}],
     )
     return response.choices[0].message.content
+            
+def stream_chat(prompt: str):
+    logger.info(f"LLM request: {prompt}")
+    response = client.chat.completions.create(
+        model="llama-3.1-8b-instant",
+        messages=[{"role": "user", "content": prompt}],
+        stream=True,
+    )
+    
+    for chunk in response:
+        if chunk.choices[0].delta.content:
+            yield chunk.choices[0].delta.content
